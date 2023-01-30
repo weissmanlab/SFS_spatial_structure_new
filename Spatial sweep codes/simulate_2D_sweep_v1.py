@@ -8,13 +8,18 @@ start_time = time.time()
 
 
 
-Deme_dimension = 7**2 
+Deme_dimension = 4**2 
 if Deme_dimension < 20:
     Augmentation_factor = 10
 elif Deme_dimension < 50:
     Augmentation_factor = 3
 else:
     Augmentation_factor = 1
+
+
+Augmentation_factor = 1
+
+
 print(f"Augmentation_factor:{Augmentation_factor}")
 SampleCount = Augmentation_factor*Deme_dimension 
 pop_deme = int(100*2000/Deme_dimension)  
@@ -26,6 +31,8 @@ lociCount = 5000
 theta = 4*pop_deme*mutarate*lociCount
 Mirgation_rate = 1200
 Recombination_rate = 4*pop_deme*0.05
+Homo_select = 4*pop_deme*0.02
+Hetero_select = 4*pop_deme*0.01
 
 ## Migration matrix
 z = math.sqrt(Deme_dimension)
@@ -52,7 +59,7 @@ command = f"msms {SampleCount} {Trial} -N {pop_deme} -t {theta} -r {Recombinatio
 
 for i in range(Deme_dimension):
     command += f"{Augmentation_factor} "
-command += "-ma " + newMa + " -SAA 40 -SaA 20 -SF 0"
+command += "-ma " + newMa + f" -SAA {Homo_select} -SaA {Hetero_select} -SF 0"
 
 
 # Run the command and save the output
