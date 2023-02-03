@@ -17,15 +17,13 @@ else:
     Augmentation_factor = 1
 
 
-Augmentation_factor = 1
-
 
 print(f"Augmentation_factor:{Augmentation_factor}")
 SampleCount = Augmentation_factor*Deme_dimension 
 pop_deme = int(100*2000/Deme_dimension)  
 
 
-Trial = 2
+Trial = 10
 mutarate = 1e-6
 lociCount = 5000
 theta = 4*pop_deme*mutarate*lociCount
@@ -70,7 +68,7 @@ result = subprocess.run(command, stdout=subprocess.PIPE)
 
 
 # Save the output to a file
-with open('7x7spatial_test_hpop.txt', 'w') as f:
+with open('4x4spatial_test_hpop.txt', 'w') as f:
     f.write(result.stdout.decode())
 
 end_time = time.time()
