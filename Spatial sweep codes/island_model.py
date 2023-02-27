@@ -23,31 +23,19 @@ SampleCount = Augmentation_factor*Deme_dimension
 pop_deme = int(100*2000/Deme_dimension)  
 
 
-Trial = 5
+Trial = 1
 mutarate = 1e-6
 lociCount = 5000
 theta = 4*pop_deme*mutarate*lociCount
-Mirgation_rate = 4*pop_deme*0.15
+Mirgation_rate = 4*pop_deme*0.06
 Recombination_rate = 4*pop_deme*0.05
 Homo_select = 2*pop_deme*0.02
 Hetero_select = 2*pop_deme*0.01
 
 ## Migration matrix
 z = math.sqrt(Deme_dimension)
-M = np.zeros((Deme_dimension, Deme_dimension)).astype(int)
-# Fill in the migration matrix.
-for i in range(Deme_dimension):
-    for j in range(Deme_dimension):
-        # If deme j is immediately to the right of deme i and i is not on the right edge of the grid,
-        # then set the migration rate from i to j to be the defined migration rate.
-        if j == i+1 and (i+1) % z != 0:
-            M[i,j] = int(Mirgation_rate)
-        # If deme j is directly below deme i, then set the migration rate from i to j to be the defined migration rate.
-        elif j == i+z:
-            M[i,j] = int(Mirgation_rate)
-        
-        # Since migration is bidirectional, set the migration rate from j to i to be the same as from i to j.
-        M[j,i] = M[i,j]
+M = np.full((Deme_dimension, Deme_dimension), Mirgation_rate)
+
 
 Ma = M.tolist()
 for i in range(Deme_dimension):
@@ -74,7 +62,7 @@ result = subprocess.run(command, stdout=subprocess.PIPE)
 
 
 # Save the output to a file
-with open('4x4spatial_test2.txt', 'w') as f:
+with open('try.txt', 'w') as f:
     f.write(result.stdout.decode())
 
 end_time = time.time()
